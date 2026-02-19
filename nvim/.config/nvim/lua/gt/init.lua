@@ -1,3 +1,3 @@
 require"gt.keymaps"
 require"gt.options"
-require"gt.packer"
+require"gt.lazy"
