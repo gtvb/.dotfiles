@@ -23,7 +23,9 @@ require("lazy").setup({
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
-    opts = {},
+    config = function()
+      vim.cmd.colorscheme("tokyonight")
+    end,
   },
 
   {
@@ -35,32 +37,16 @@ require("lazy").setup({
 
   {
     "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate"
+    build = ":TSUpdate",
+    lazy = false,
   },
 
   {
-    "mfussenegger/nvim-lint",
-    config = function()
-      local lint = require("lint")
-
-      lint.linters.clangtidy.args = {
-          "--quiet",
-          "--",
-          "-std=c11",
-      }
-
-      lint.linters_by_ft = {
-        lua = { "luacheck" },
-        c = { "clangtidy" },
-        python = { "ruff" },
-      }
-
-      vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
-        callback = function()
-          lint.try_lint()
-        end,
-      })
-    end,
+    "neovim/nvim-lspconfig",
   },
 
+  {
+    "stevearc/conform.nvim",
+    opts = {},
+  },
 })
